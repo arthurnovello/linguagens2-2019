@@ -1,0 +1,32 @@
+.into_grid{
+    display: grid;
+    grid-template-columns: 200px 300px 100px;
+    grid-template-rows: 200px 300px 100px;
+    grid-gap: 20px;
+}
+
+.into_grid2{
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr;
+    grid-template-rows: 2fr 2fr;
+    grid-gap: 5px;
+}
+
+.itens{
+    margin: 5px;
+    background: tomato;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.itensb{
+    margin: 5px;
+    background: teal;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.sem-margem{
+    margin: 0;
+}
+
