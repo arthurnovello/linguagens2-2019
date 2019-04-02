@@ -1,0 +1,25 @@
+{
+  "name": "gulp_hello",
+  "version": "1.0.0",
+  "description": "[![Instituto Maua de Tecnologia](https://i.imgur.com/5ZoBJ17.png)](https://maua.br)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthurnovello/linguagens2-2019.git"
+  },
+  "author": "Arthur Novello",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arthurnovello/linguagens2-2019/issues"
+  },
+  "homepage": "https://github.com/arthurnovello/linguagens2-2019#readme",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0"
+  }
+}
