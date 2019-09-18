@@ -1,0 +1,190 @@
+{
+	"info": {
+		"_postman_id": "11d98395-55cd-4985-8ec2-9af6e2cd76c0",
+		"name": "AtividadeBi03",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/registration",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"teste1\",\n\t\"password\": \"teste1\"\n\t\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/registration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"teste1\",\n\t\"password\": \"teste1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/secret",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1Njg3Mzg2MTcsIm5iZiI6MTU2ODczODYxNywianRpIjoiZDI1ZjM1MGEtYWQ5MC00MGFkLTkzZTktMDk5OGJkZmJkN2RiIiwiZXhwIjoxNTY4NzM5NTE3LCJpZGVudGl0eSI6InRlc3RlMSIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.21EBYSOAMIGvwVbetLUr6DNLAV2x7VzWRpRMLy2_M3o",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/secret",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secret"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/bolos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/bolos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"bolos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/encomendas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1Njg3NTMwMjIsIm5iZiI6MTU2ODc1MzAyMiwianRpIjoiMjU3NDU1NmItMzMyYS00YjlkLWI4ZDctMzY1MGYxN2U2MTdhIiwiZXhwIjoxNTY4NzUzOTIyLCJpZGVudGl0eSI6InRlc3RlMSIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.44hTzZmjy9TZk10sPw-BIM7B5SZVYItW8cfLxxVjSnc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/encomendas",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"encomendas"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

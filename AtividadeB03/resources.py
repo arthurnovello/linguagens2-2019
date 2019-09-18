@@ -1,8 +1,9 @@
 from flask_restful import Resource, reqparse
-from models import UserModel, RevokedTokenModel
+from models import UserModel, RevokedTokenModel, BolosModel, EncomendasModel
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required,
                                 get_jwt_identity, get_raw_jwt)
+
 
 parser = reqparse.RequestParser()
 parser.add_argument('username', help='O campo dever ser preenchido',
@@ -13,6 +14,8 @@ parser.add_argument('password', help='O campo dever ser preenchido',
 
 class UserRegistration(Resource):
     def post(self):
+        parser.add_argument('nome', help='O campo dever ser preenchido',
+                            required=True)
         data = parser.parse_args()
 
         if UserModel.find_by_username(data['username']):
@@ -21,7 +24,8 @@ class UserRegistration(Resource):
 
         new_user = UserModel(
             username=data['username'],
-            password=UserModel.generate_hash(data['password'])
+            password=UserModel.generate_hash(data['password']),
+            nome=data['nome']
         )
 
         try:
@@ -75,7 +79,7 @@ class UserLogoutRefresh(Resource):
     def post(self):
         jti = get_raw_jwt()['jti']
         try:
-            revoked_token = RevokedTokenModel(jti = jti)
+            revoked_token = RevokedTokenModel(jti=jti)
             revoked_token.add()
             return {'message': 'Refresh token has been revoked'}
         except:
@@ -98,9 +102,46 @@ class AllUsers(Resource):
         return UserModel.delete_all()
 
 
-class SecretResource(Resource):
+class AllBolos(Resource):
+    def get(self):
+        return BolosModel.return_all()
+
+
+class Encomendar(Resource):
+    @jwt_required
+    def post(self):
+        parser.add_argument('bolo_id', help='O campo dever ser preenchido',
+                            required=True)
+        parser.remove_argument('password')
+        parser.remove_argument('nome')
+        data = parser.parse_args()
+
+        new_encomenda = EncomendasModel(
+            usr_id=UserModel.find_by_username(data['username']).id,
+            bolo_id=data['bolo_id'],
+            preco=BolosModel.return_by_id(data['bolo_id']).preco
+        )
+
+        try:
+            new_encomenda.save_to_db()
+            return {
+                'message': 'Encomenda was created'
+            }
+        except:
+            return {'message': 'Something went wrong'}, 500
+
+
+class Encomendas(Resource):
     @jwt_required
     def get(self):
-        return {
-            'answer': 42
-        }
+        return EncomendasModel.return_all()
+
+    @jwt_required
+    def delete(self):
+        return EncomendasModel.delete_by_id(id)
+
+
+class Encomenda(Resource):
+    @jwt_required
+    def get(self, id):
+        return EncomendasModel.return_by_id(id)

@@ -8,6 +8,8 @@ class UserModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
+    nome = db.Column(db.String(120), nullable=False)
+#    encomendas = db.relationship('EncomendasModel', backref='user', lazy=True)
 
     def save_to_db(self):
         db.session.add(self)
@@ -58,3 +60,65 @@ class RevokedTokenModel(db.Model):
     def is_jti_blacklisted(cls, jti):
         query = cls.query.filter_by(jti=jti).first()
         return bool(query)
+
+
+class BolosModel(db.Model):
+    __tablename__ = 'bolos'
+
+    id = db.Column(db.Integer, primary_key=True)
+    sabor = db.Column(db.String(255), unique=True, nullable=False)
+    tamanho = db.Column(db.String(255), nullable=False)
+    preco = db.Column(db.String(255), nullable=False)
+    encomendas = db.relationship('EncomendasModel', backref='bolos', lazy=True)
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def return_all(cls):
+        def to_json(x):
+            return {
+                'id': x.id,
+                'sabor': x.sabor,
+                'tamanho': x.tamanho,
+                'preco': x.preco
+            }
+        return {'bolos': list(map(lambda x: to_json(x), BolosModel.query.all()))}
+
+    @classmethod
+    def return_by_id(cls, id):
+        return cls.query.filter_by(id=id).first()
+
+
+class EncomendasModel(db.Model):
+    __tablename__ = "encomendas"
+
+    id = db.Column(db.Integer, primary_key=True)
+    usr_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    bolo_id = db.Column(db.Integer, db.ForeignKey('bolos.id'), nullable=False)
+    preco = db.Column(db.Integer, nullable=False)
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def return_all(cls):
+        def to_json(x):
+            return {
+                'id': x.id,
+                'usr_id': x.usr_id,
+                'bolo_id': x.bolo_id,
+                'preco': x.preco
+            }
+        return {'encomendas': list(map(lambda x: to_json(x), EncomendasModel.query.all()))}
+
+    @classmethod
+    def return_by_id(cls, id):
+        return cls.query.filter_by(id=id).first()
+
+    @classmethod
+    def delete_by_id(cls, id):
+        cls.query.delete(cls)
+        cls.commit()
